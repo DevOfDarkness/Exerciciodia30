@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Emprestimo extends Migration
+class CreateEmprestimosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Emprestimo extends Migration
      */
     public function up()
     {
-      Schema::create('emprestimo', function (Blueprint $table){
+      Schema::create('emprestimos', function (Blueprint $table){
           $table->increments('id');
           $table->string('status');
           $table->integer('id_cliente')->unsigned()->nullable();
@@ -23,10 +23,12 @@ class Emprestimo extends Migration
 
       });
 
-      Schema::table('emprestimo', function(Blueprint $table){
+      Schema::table('emprestimos', function(Blueprint $table){
           $table->foreign('id_cliente')->references('id')->on('clientes')->onDelete('set null');
-          $table->foreign('id_livro')->references('id')->on('livros')->onDelete('set null');
+      });
 
+          Schema::table('emprestimos', function(Blueprint $table){
+          $table->foreign('id_livro')->references('id')->on('livros')->onDelete('set null');
 
       });
 
@@ -39,6 +41,6 @@ class Emprestimo extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('emprestimos');
     }
 }
