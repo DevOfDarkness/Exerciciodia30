@@ -18,14 +18,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 });
-Route::post('clientes','ClientesController@create');
+Route::post('clientes','ClientesController@create')->name('create_clientes');
 
-Route::post('livros','LivrosController@create');
+Route::post('livros','LivrosController@create')->name('create_livros');
 
-Route::get('livros/{id}', 'LivrosController@show');
+Route::get('livros/{id}', 'LivrosController@show')->name('show_livros');
 
-Route::get('livros', 'LivrosController@list');
+Route::get('livros', 'LivrosController@list')->name('list_livros');
 
-Route::put('livros/{id}', 'LivrosController@update');
+Route::put('livros/{id}', 'LivrosController@update')->name('update_livros');
 
-Route::delete('livros/{id}', 'LivrosController@delete');
+Route::delete('livros/{id}', 'LivrosController@delete')->name('delete_livros');
+
+Route::apiResource('emprestimos', 'EmprestimoController');
